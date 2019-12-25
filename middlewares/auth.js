@@ -6,14 +6,17 @@ module.exports=function auth(req,res,next){
     try {
         const decoded=jwt.verify(token,process.env.JSON_WEB_TOKE);
         req.content=decoded;
-        //validation size of file
-        let fileExt=['.png','.jpg','.jpeg','.svg'];
-        let file=req.file;
-        if(file.size>process.env.FILE_SIZE_LIMITATION||(!fileExt.includes(path.extname(file.originalname)))){
-            return res.json({
-                message:'سایز یا پسوند فایل مشکل دارد',
-                success:false
-            });
+        //validation size of file and extenstion of file
+            if(req.file)
+            {
+                let fileExt=['.png','.jpg','.jpeg','.svg'];
+                let file=req.file;
+                if(file.size>process.env.FILE_SIZE_LIMITATION||(!fileExt.includes(path.extname(file.originalname)))){
+                return res.json({
+                    message:'سایز یا پسوند فایل مشکل دارد',
+                    success:false
+                });
+            }
         }
         next();
     } catch (err) {
