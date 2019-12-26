@@ -13,7 +13,7 @@ app.post('/user/upload_image',auth,uploadImage.single('image'),controller.save.b
 app.post('/user/get_image',auth,controller.download.bind(controller));
 app.post('/user/delete_image',auth,controller.delete.bind(controller));
 
-
-app.listen(APPLICATION_PORT,()=>{
+const port=process.env.APPLICATION_PORT;
+app.listen(port,()=>{
     console.log(`server is running on port ${port}`);
 });

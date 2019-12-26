@@ -2,6 +2,7 @@ const jwt=require('jsonwebtoken');
 
 module.exports=function auth(req,res,next){
     const token=req.header('x-auth-token');
+    console.log(token);
     if(!token)return res.status(401).json('access denied');
     try {
         const decoded=jwt.verify(token,process.env.JSON_WEB_TOKE);
