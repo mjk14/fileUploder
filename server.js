@@ -10,8 +10,8 @@ const auth=require('./middlewares/auth.js');
 
 //routes
 app.post('/user/upload_image',auth,uploadImage.single('image'),controller.save.bind(controller));
-app.post('/user/get_image',controller.download.bind(controller));
-app.delete('/user/delete_image',auth,controller.delete.bind(controller));
+app.post('/user/get_image',auth,controller.download.bind(controller));
+app.post('/user/delete_image',auth,controller.delete.bind(controller));
 
 
 app.listen(APPLICATION_PORT,()=>{
